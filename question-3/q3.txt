@@ -1,0 +1,87 @@
+All work must be done in the namespace:
+
+cka-net-q3
+
+🚀 Tasks
+1. Create a Pod that acts as a server
+
+Create a Pod:
+
+Name: backend
+
+Image: nginx:1.21-alpine
+
+Expose container port: 80
+
+2. Expose this Pod as a ClusterIP Service
+
+Create a Service:
+
+Name: backend-svc
+
+Service port → target port: 8080 → 80
+
+3. Create a test client Pod
+
+Create a Pod:
+
+Name: test-client
+
+Image: busybox
+
+Command: sleep 3600
+
+4. Verify connectivity BEFORE applying restrictions
+
+From inside test-client, run an HTTP request to:
+
+backend-svc:8080
+
+
+Save output to:
+
+/opt/cka/q3/before-policy.txt
+
+5. Apply a NetworkPolicy blocking ALL ingress
+
+Create a NetworkPolicy:
+
+Name: deny-all-ingress
+
+Namespace: cka-net-q3
+
+Requirements:
+
+Must block all incoming connections to backend Pod.
+
+6. Verify connectivity AFTER applying the policy
+
+Test again from test-client.
+
+Save failed output to:
+
+/opt/cka/q3/after-policy.txt
+
+7. Create a NetworkPolicy allowing ONLY test-client to access backend
+
+Create a NetworkPolicy:
+
+Name: allow-client
+
+Namespace: cka-net-q3
+
+Rules:
+
+Allow ingress only from Pod test-client
+
+Allow port 80
+
+Block all others
+
+8. Verify connectivity is restored
+
+Run connectivity test again (it should succeed).
+
+Save output to:
+
+/opt/cka/q3/final-connectivity.txt
