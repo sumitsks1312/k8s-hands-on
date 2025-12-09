@@ -1,1 +1,17 @@
-pod/test-pod created
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: test-pod
+  name: test-pod
+  namespace: cka-lab-q1
+spec:
+  containers:
+  - image: busybox
+    name: test-pod
+    command: ["sh","-c","sleep 3600"]
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Never
+status: {}
