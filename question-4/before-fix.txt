@@ -1,0 +1,3 @@
+Connecting to web-svc:8080 (10.101.250.195:8080)
+wget: can't connect to remote host (10.101.250.195): Connection refused
+command terminated with exit code 1

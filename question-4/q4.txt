@@ -1,0 +1,116 @@
+Namespace: web-ns-q4
+(Exam Style – No hints, no comments, no commands)
+
+📘 Task Description
+
+A web application must be deployed inside a dedicated namespace and exposed using a NodePort service.
+You are given two YAML manifests. After applying them, the application is not reachable.
+
+Your job:
+
+Ensure the namespace exists
+
+Apply the manifests exactly as given
+
+Test service connectivity
+
+Debug and fix the issues
+
+Verify access internally and externally
+
+Save the results into the required files
+
+📄 YAML FILES PROVIDED TO YOU
+File 1: web-deploy.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-deploy
+  namespace: web-ns-q4
+  labels:
+    app: web
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: web-app
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.21-alpine
+        ports:
+        - containerPort: 8080
+
+File 2: web-svc.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-svc
+  namespace: web-ns-q4
+spec:
+  type: NodePort
+  selector:
+    app: web-svc
+  ports:
+  - port: 8080
+    targetPort: 8081
+    nodePort: 308000
+
+🧩 TASKS
+1. Namespace
+
+Ensure the namespace web-ns-q4 exists.
+All resources must be created inside this namespace only.
+
+2. Apply the Provided YAML
+
+Apply both YAML files:
+
+web-deploy.yaml
+
+web-svc.yaml
+
+Apply them as-is, without modification.
+
+3. Test Internal Connectivity
+
+Attempt to connect to the service from within the namespace.
+Save the test output (whether success or failure) to:
+
+/opt/cka/q4/before-fix.txt
+
+4. Debug the Issue
+
+Investigate why the Deployment and Service are not functioning correctly.
+
+You must find and fix all misconfigurations.
+
+5. Fix the Resources
+
+Correct the Deployment and Service so that:
+
+Pods are running successfully
+
+Service selects the correct pods
+
+Service ports and container ports match
+
+NodePort is valid
+
+The application becomes accessible internally and externally
+
+6. Verify After Fix
+
+Test both:
+
+Access from inside the namespace
+
+Access via NodePort from a worker node IP
+
+Save the successful output to:
+
+/opt/cka/q4/after-fix.txt
