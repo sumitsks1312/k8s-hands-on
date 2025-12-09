@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: "2025-12-09T00:42:43Z"
+  labels:
+    run: web-pod
+  name: web-svc
+  namespace: cka-lab-q1
+  resourceVersion: "11425"
+  uid: f4e3d9c0-3e13-4a31-9aec-a2ace6dd83c6
+spec:
+  clusterIP: 10.99.182.45
+  clusterIPs:
+  - 10.99.182.45
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: 80
+  selector:
+    run: web-pod
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}

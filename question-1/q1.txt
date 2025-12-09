@@ -1,0 +1,46 @@
+All work must be done in the namespace cka-lab-q1.
+
+You are asked to verify that a Pod can successfully communicate with another Pod using a ClusterIP Service.
+
+Tasks
+1. Create a Pod
+
+Create a Pod named web-pod using image:
+
+nginx:1.21-alpine
+
+2. Expose the Pod as a ClusterIP Service
+
+Create a Service named web-svc:
+
+Type: ClusterIP
+
+Port: 8080
+
+TargetPort: 80
+
+3. Create a Test Pod
+
+Create a Pod named test-pod using image:
+
+busybox
+
+
+This Pod must remain running:
+
+sleep 3600
+
+4. Verify HTTP Access
+
+From inside test-pod, send an HTTP request to web-svc and save the output to:
+
+/opt/cka/q1/web-check.txt
+
+
+(You must exec into the Pod and redirect the output properly.)
+
+5. Verify Service DNS
+
+Check that the DNS name resolves successfully:
+
+web-svc.cka-lab-q1.svc.cluster.local
