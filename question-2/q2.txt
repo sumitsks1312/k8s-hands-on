@@ -1,0 +1,54 @@
+1️⃣ Create a Deployment
+
+In the namespace cka-app-q2:
+
+Create a Deployment named api-deploy.
+
+Use the container image nginx:1.20.
+
+Configure 3 replicas.
+
+Ensure the container exposes port 80.
+
+This sets up a 3-pod application inside the new namespace.
+
+2️⃣ Perform a rolling update
+
+Update the Deployment so that all pods switch to:
+
+Image: nginx:1.21
+
+The rollout should complete successfully.
+
+3️⃣ Simulate a failed rollout
+
+Perform another update, this time specifying an invalid or nonexistent image.
+
+This will cause the rollout to fail and put the new pods into a bad state.
+
+4️⃣ Save rollout diagnostic output
+
+Check the rollout status of api-deploy (while it is failing).
+
+Capture the full output of that status check and save it to:
+
+/opt/cka/q2/rollout-status.txt
+
+
+Make sure the file contains exactly what the rollout status command printed.
+
+5️⃣ Rollback
+
+Rollback the Deployment to the last successful image version (the working nginx:1.21 rollout).
+
+After rollback, the Deployment should return to a healthy state.
+
+6️⃣ Verify
+
+Verify that:
+
+All pods are running successfully.
+
+They are using the nginx:1.21 image.
+
+The Deployment is stable in the cka-app-q2 namespace.
