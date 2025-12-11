@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: api-backend
+    tier: backend
+  name: api-backend
+  namespace: web-ns-q6
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api-backend
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: api-backend
+        tier: backend
+    spec:
+      containers:
+      - image: nginx:1.21
+        name: nginx
+        ports:
+        - containerPort: 80
+        resources: {}
+status: {}

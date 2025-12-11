@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: api-backend
+    tier: backend
+  name: api-svc
+  namespace: web-ns-q6
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: api-backend
+  type: ClusterIP
+status:
+  loadBalancer: {}

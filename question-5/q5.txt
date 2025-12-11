@@ -1,0 +1,41 @@
+1️⃣ Create a namespace named:
+
+web-ns-q5
+
+2️⃣ Deploy a Deployment using the following YAML:
+
+Name: api-deploy
+
+Namespace: web-ns-q5
+
+Replicas: 2
+
+Image: nginx:1.21
+
+Container name: api-container
+
+Add both liveness & readiness probes:
+
+Type: HTTP GET
+
+Path: /
+
+Port: 80
+
+Set resource requests & limits:
+
+Requests: CPU 100m, Memory 128Mi
+
+Limits: CPU 200m, Memory 256Mi
+
+📌 Provide full YAML for Deployment inside the question (not applied), and ask the candidate to apply it.
+
+3️⃣ After applying the YAML:
+
+Verify if all pods become Running and both probes pass without restarting the pods.
+
+4️⃣ Output required from candidate:
+
+The current number of restarts for each pod
+
+Explain why probes help prevent unnecessary restarts

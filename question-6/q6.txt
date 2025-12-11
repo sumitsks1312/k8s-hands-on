@@ -1,0 +1,112 @@
+Requirements
+1️⃣ Create Namespace
+
+Create namespace web-ns-q6.
+
+2️⃣ Deploy Backend Pod (with YAML)
+
+Create a file named backend.yaml and define:
+
+Kind: Deployment
+
+Name: api-backend
+
+Replicas: 1
+
+Container Image: nginx:1.21
+
+Container Port: 8080
+
+Labels:
+
+app: api
+tier: backend
+
+
+Important:
+Do NOT include readiness/liveness probes in YAML.
+
+Apply the YAML.
+
+3️⃣ Expose Backend via ClusterIP
+
+Expose the backend as:
+
+Service Name: api-svc
+
+Type: ClusterIP
+
+Port: 80 → 8080
+
+Selector must match the Deployment labels.
+
+4️⃣ Deploy Test Client Pod
+
+Run a test pod named client-pod in the same namespace using image:
+
+busybox:1.36
+
+It should sleep long enough so you can exec into it.
+
+5️⃣ From Test Pod, Verify Service Connectivity
+
+Inside client-pod, test:
+
+DNS resolution
+
+HTTP response from api-svc
+
+Observe intermittent failures.
+
+You must figure out why 502 might happen even though nginx is running.
+
+6️⃣ Debugging Requirement
+
+Find the root cause using actual cluster tools.
+Possible issues you may uncover (but NOT limited to):
+
+Service selector mismatch
+
+Wrong port mapping
+
+Pod crash loops
+
+Nginx default config returning unexpected pages
+
+NetworkPolicy blocking intermittent traffic
+
+Node-level issues
+
+Wrong version of image used
+
+Missing index.html causing upstream errors
+
+You decide what the issue actually is based on reality after you deploy and test.
+
+7️⃣ Fix the Issue
+
+Once the cause is identified, patch / update the Deployment or Service accordingly.
+
+8️⃣ After Fixing: Validate
+
+From client-pod, verify:
+
+Continuous curl (multiple requests) returns 200 OK
+
+No intermittent failures
+
+Pod restart count is stable
+
+9️⃣ Provide the Following Outputs
+
+Once you finish:
+
+Number of restarts of backend pod
+
+Service Endpoints for api-svc
+
+Final resolved cause of the intermittent 502
+
+The exact fix you implemented
+
+Confirm the output of 10 continuous curls
